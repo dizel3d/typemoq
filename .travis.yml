@@ -1,10 +1,17 @@
 language: node_js
-
 node_js:
-  - "node"
-
+- node
 install:
-  - "npm install"
-
+- npm install
 script:
-  - "gulp test:travis"
+- npm run build
+- npm test
+deploy:
+  provider: npm
+  email: dizel3d@gmail.com
+  api_key:
+    secure: uMyYF4Zp/pPwQOJ403RwsRYo/DNS6Jv8BaBoGsmzsv+NWprVIhmiysLvoj4lf01vy+ssFMYeiUz5ltEP/+fPc4QMO/orrVixCh11j1z2KJJKHDj/mUKtFBBg2VB7ONJ0+8JIwdN3+3kfGB+8JiTS1oFo1li3ylnjMM5NKdbyvs4G9aEJC2Gl5vvpAp9r2ELNOOUgWfgUaC/bq67bG/gDAWo2h5JrDO2ixPkQuyIDkk6ahx4EyMtID8Q7h0fif7oJVPO2JYXzcKGABJrNasJK5rzydeTDD8gzG7O2q8G1x7WAJi8FFuAvQ0Y3vF5uEdueLC1+KNDixAnxeJ7nDz4vd90lfbbcZ5KGQ5xY5qMfzBYBGGQwwmnCkkzq0/lRMshwYBluk3UfJb3EcwfO2i8WEFTUMZvWNva8zkPxahVT7mnun1Ioie97ZrYH5WVAJySk8k2gGD5pjbb3xLYg1ERihBt+EaMfACLcvwAbcybBhz6X96AaPdAE0Abxm/oSWYLgnT9Lims9QhAd47887FOHU96muU2VLpf7pBTwWx1ZnYYqAUWiJiJuE/jrOGonQMbt2+MEd5Ubn5KDg+LGQEr64bMrQSOnNKCGH8OzWoe3qwYPHxEYj5R1rF6K57jZ+9nZr89+zbFD+RFhu6TG3TqxF77A0NHYUC/x37tIhJHAklg=
+  skip_cleanup: true
+  on:
+    branch: master
+    repo: dizel3d/typemoq

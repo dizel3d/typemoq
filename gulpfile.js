@@ -207,7 +207,10 @@ gulp.task('test:karma', function (cb) {
 });
 
 gulp.task('test:sauce', function (cb) {
-	return runKarma('karma.conf-ci.js', cb);
+    // TODO uncomment
+	//return runKarma('karma.conf-ci.js', cb);
+    console.warn('test:sauce is not implemented');
+    cb();
 });
 
 function runKarma(karmaConf, done) {
@@ -267,10 +270,12 @@ gulp.task('build', ['clean'], function (cb) {
 	runSequence('scripts:src', 'scripts:test', 'scripts:test.es6', 'minify', cb);
 });
 
-gulp.task('default', ['build'], function (cb) {
-	runSequence('test:karma', 'test:mocha', 'test:mocha.es6', cb);
+gulp.task('test', function (cb) {
+    var args = ['test:karma', 'test:mocha', 'test:mocha.es6', cb];
+    process.env.CI && args.unshift('test:sauce');
+	runSequence.apply(null, args);
 });
 
-gulp.task('test:travis', ['build'], function (cb) {
-	runSequence('test:sauce', 'test:mocha', 'test:mocha.es6', cb);
+gulp.task('default', ['build'], function (cb) {
+	runSequence('test', cb);
 });
